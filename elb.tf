@@ -4,25 +4,25 @@ resource "aws_lb" "external-alb" {
  internal = false 
  load_balancer_type = "application" 
  security_groups = [aws_security_group.demosg.id] 
- subnets = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-1.id] 
+ subnets = [aws_subnet.tf-pub-sn-1.id, aws_subnet.tf-pub-sn-2.id] 
 } 
 resource "aws_lb_target_group" "target-elb" { 
  name = "ALB TG" 
  port = 80 
  protocol = "HTTP" 
- vpc_id = aws_vpc.demovpc.id 
+ vpc_id = aws_vpc.TF-VPC.id 
 } 
 resource "aws_lb_target_group_attachment" "attachment" { 
  target_group_arn = aws_lb_target_group.external-alb.arn 
  target_id = aws_instance.ec2-instance.id 
  port = 80 
 depends_on = [ 
- aws_instance.demoinstance, 
+ aws_instance.ec2-instance, 
 ] 
 } 
 resource "aws_lb_target_group_attachment" "attachment" { 
  target_group_arn = aws_lb_target_group.external-alb.arn 
- target_id = aws_instance.demoinstance1.id 
+ target_id = aws_instance..id 
  port = 80 
 depends_on = [ 
  aws_instance.demoinstance1, 
