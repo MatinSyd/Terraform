@@ -22,9 +22,9 @@ depends_on = [
 } 
 resource "aws_lb_target_group_attachment" "attachment" { 
  target_group_arn = aws_lb_target_group.external-alb.arn 
- target_id = aws_instance..id 
+ target_id = aws_instance.ec2-ie.id 
  port = 80 
 depends_on = [ 
- aws_instance.demoinstance1, 
+ aws_instance.ec2-ie, 
 ] 
 } 
